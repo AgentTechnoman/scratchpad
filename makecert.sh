@@ -76,7 +76,7 @@ echo ""
 
 if [ $type == 1 ]; then
 	type=ssl
-	cfg="ca -config ../intermediate/$type.cnf -batch -extensions server_cert -notext -md sha256 -passin pass:@Spring2015 -days $life"
+	cfg="ca -config ../intermediate/$type.cnf -batch -extensions server_cert -notext -md sha256 -passin pass:$(cat password) -days $life"
 	if [ $csr == y ]; then
 		read -p "Common Name: " cn
 		read -p "Filename base: " file
@@ -116,7 +116,7 @@ if [ $type == 1 ]; then
 	echo "Complete! Please find your new certificate files in 'endpoints/$scrubbedcn.*'"
 elif [ $type == 2 ]; then
 	type=smime
-	cfg="ca -config ../intermediate/$type.cnf -batch -extensions usr_cert -notext -md sha256 -passin pass:@Spring2015 -days $life" 
+	cfg="ca -config ../intermediate/$type.cnf -batch -extensions usr_cert -notext -md sha256 -passin pass:$(cat password) -days $life" 
 	read -p "Common Name: " cn
 	read -p "Country: " c
 	read -p "State: " st
